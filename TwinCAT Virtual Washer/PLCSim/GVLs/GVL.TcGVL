@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{e9c28301-dcd0-44d3-92ba-a43315f0c491}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	qxPulseOne		AT %Q*:	BOOL; 		(* PULS button *)
+	qxStart			AT %Q*:	BOOL; 		(* START switch *)
+	qxSetLevel		AT %Q*:	BOOL; 		(* NIVÅ switch *)
+	qxLevel3		AT %Q*:	BOOL; 		(* Sensor for level 3 *)
+	qxLevel2		AT %Q*:	BOOL; 		(* Sensor for level 2 *)
+	qxLevel1		AT %Q*:	BOOL; 		(* Sensor for level 1 *)
+	qxNotEmpty		AT %Q*:	BOOL; 		(* Sensor for not empty *)
+	qxTempOk		AT %Q*:	BOOL; 		(* Temp sensor *)
+	qwCurTemp		AT %Q*: INT:=20;	(* Current Temparature *)
+	qwSetTem		AT %Q*:	INT:= 40;	(* Setting temparature Button *)
+	
+	ixPulseTwo		AT %I*:	BOOL; 		(* PULS button *)
+	ixForw			AT %I*:	BOOL; 		(* Washer cylinder forward *)
+	ixBack			AT %I*:	BOOL; 		(* Washer cylinder back *)
+	ixSpin			AT %I*:	BOOL; 		(* Washer cylinder spin *)
+	ixHeating		AT %I*:BOOL;		(* Heating coil ON *)
+	ixFill			AT %I*:	BOOL; 		(* Fill water *)
+	ixDrain			AT %I*:	BOOL; 		(* Drain water *)
+	ixDispBit1		AT %I*:	BOOL; 		(* Display bit 1 *)
+	ixDispBit2		AT %I*:	BOOL; 		(* Display bit 2 *)
+
+	nWaterLev:		INT:=0;			(* Internal variable *)
+	nShowWater:		INT;			(* Internal variable *)
+	nDispNo:		INT:=0;			(* Internal variable *)
+	nCylPos:		INT:=0;			(* Internal variable *)
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

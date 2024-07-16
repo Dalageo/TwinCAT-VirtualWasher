@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{e7769bdf-9832-4bd3-b3d8-1ef1114b8a6c}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	ixPulseOne		AT %I*:	BOOL; 		(* PULS button *)
+	ixStart			AT %I*:	BOOL; 		(* START switch *)
+	ixSetLevel		AT %I*:	BOOL; 		(* NIVÅ switch *)
+	ixLevel3		AT %I*:	BOOL; 		(* Sensor for level 3 *)
+	ixLevel2		AT %I*:	BOOL; 		(* Sensor for level 2 *)
+	ixLevel1		AT %I*:	BOOL; 		(* Sensor for level 1 *)
+	ixNotEmpty		AT %I*:	BOOL; 		(* Sensor for not empty *)
+	ixTempOk		AT %I*:	BOOL; 		(* Temp sensor *)
+	iwSetTemp		AT %I*: INT;		(* Temparature set on the dail in HMI*)
+	iwCurrentTemp	AT %I*: INT;		(* Current Temparture of the washing machine*)
+	
+	qxPulseTwo		AT %Q*:	BOOL; 		(* PULS button *)
+	qxForw			AT %Q*:	BOOL; 		(* Washer cylinder forward *)
+	qxBack			AT %Q*:	BOOL; 		(* Washer cylinder back *)
+	qxSpin			AT %Q*:	BOOL; 		(* Washer cylinder spin *)
+	qxFill			AT %Q*:	BOOL; 		(* Fill water *)
+	qxDrain			AT %Q*:	BOOL; 		(* Drain water *)
+	qxDispBit1		AT %Q*:	BOOL; 		(* Display bit 1 *)
+	qxDispBit2		AT %Q*:	BOOL; 		(* Display bit 2 *)
+	qxHeatingON		AT %Q*: BOOL;		(* Heater ON *)
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

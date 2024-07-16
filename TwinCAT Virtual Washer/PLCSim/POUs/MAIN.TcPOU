@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{31785a7b-363b-4926-ba76-520e0571d2ce}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+END_VAR
+
+VAR CONSTANT
+	WaterLevMax:		INT:= 200;
+	WaterLev3:			INT:= 150;
+	WaterLev2:			INT:= 100;
+	WaterLev1:			INT:= 50;
+END_VAR    ]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[(*  function block Washer  *)
+(*  2008-10-08  BoS University West *)
+(*	2023-02-17	GabrielS	Updated to GVL and Exam Version*)
+
+(*  -------------  water level  -----------------  *)
+IF GVL.ixFill AND GVL.nWaterLev < WaterLevMax THEN				(* increase water level *)
+	GVL.nWaterLev := GVL.nWaterLev + 1;
+END_IF
+
+IF GVL.ixDrain AND GVL.nWaterLev > 0 THEN						(* decrease water level *)
+	GVL.nWaterLev := GVL.nWaterLev - 1;
+END_IF
+
+GVL.nShowWater := - GVL.nWaterLev;								(* inverting only for display function *)
+
+(*  -------------  water level sensors  -----------------  *)
+IF GVL.nWaterLev > 0 THEN
+	GVL.qxNotEmpty := TRUE;
+ELSE
+	GVL.qxNotEmpty := FALSE;
+END_IF
+IF GVL.nWaterLev >= WaterLev1 THEN
+	GVL.qxLevel1 := TRUE;
+ELSE
+	GVL.qxLevel1 := FALSE;
+END_IF
+IF GVL.nWaterLev >= WaterLev2 THEN
+	GVL.qxLevel2 := TRUE;
+ELSE
+	GVL.qxLevel2 := FALSE;
+END_IF
+IF GVL.nWaterLev >= WaterLev3 THEN
+	GVL.qxLevel3 := TRUE;
+ELSE
+	GVL.qxLevel3 := FALSE;
+END_IF
+
+
+(*  -------------  water temp sensor  -----------------  *)
+
+IF GVL.qwCurTemp > GVL.qwSetTem-3 AND GVL.qwCurTemp < GVL.qwSetTem+3 THEN
+	GVL.qxTempOk := TRUE;
+ELSE
+	GVL.qxTempOk := FALSE;
+END_IF
+
+(*  -----------  Water Heater and Cooler  -------------  *)
+
+IF gvl.ixHeating AND GVL.qwCurTemp < 100 THEN
+	gvl.qwCurTemp:=gvl.qwCurTemp+1;
+ELSIF NOT gvl.ixHeating AND GVL.qwCurTemp > 2 THEN
+	gvl.qwCurTemp:=gvl.qwCurTemp-1;
+END_IF
+
+(*  -------------  cylinder posistion  -----------------  *)
+IF GVL.ixForw AND NOT GVL.ixSpin THEN
+	GVL.nCylPos := GVL.nCylPos+5;
+ELSIF GVL.ixForw AND GVL.ixSpin THEN
+	GVL.nCylPos := GVL.nCylPos+15;
+END_IF
+IF GVL.ixBack AND NOT GVL.ixSpin THEN
+	GVL.nCylPos := GVL.nCylPos-5;
+ELSIF GVL.ixBack AND  GVL.ixSpin THEN
+	GVL.nCylPos := GVL.nCylPos-15;
+END_IF
+
+IF GVL.nCylPos > 359 THEN
+	GVL.nCylPos := 0;
+ELSIF GVL.nCylPos < 0 THEN
+	GVL.nCylPos :=355;
+END_IF
+
+(*  -------------  display number  -----------------  *)
+IF NOT GVL.ixDispBit1 AND NOT GVL.ixDispBit2 THEN
+	GVL.nDispNo:=0;
+ELSIF GVL.ixDispBit1 AND NOT GVL.ixDispBit2 THEN
+	GVL.nDispNo:=1;
+ELSIF NOT GVL.ixDispBit1 AND  GVL.ixDispBit2 THEN
+	GVL.nDispNo:=2;
+ELSIF GVL.ixDispBit1 AND GVL.ixDispBit2 THEN
+	GVL.nDispNo:=3;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="17" Count="1" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="19" Count="32" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="72" Count="7" />
+      <LineId Id="118" Count="1" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="124" Count="1" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="80" Count="27" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
