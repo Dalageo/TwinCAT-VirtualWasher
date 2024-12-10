@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/github/stars/Dalageo/TwinCat-VirtualWasher?style=social" alt="GitHub stars">
 </div>
 
-# Simulating a Washing Machine System with TwinCAT PLC Programming
+# Simulating a Washing Machine System with TwinCAT PLC Programming 🧼
 
 This repository contains a simulation project for a Washing Machine System, developed within the <a href="https://www.beckhoff.com/en-en/products/automation/twincat/"> TwinCAT </a> environment as part of a master's course assignment at <a href="https://www.hv.se/en/">University West</a>. The assignment involves developing the control logic for specific functions of a washing machine, with the `PLCSim` program, including the `Visualization.TcVIS`, provided by the university. The designed washing machine system includes the following functionalities:</p>
 
